@@ -8,5 +8,7 @@ module com.example.dndbuilder {
 	requires eu.hansolo.tilesfx;
 
 	opens com.example.dndbuilder to javafx.fxml;
+	opens com.example.dndbuilder.controllers to javafx.fxml;
 	exports com.example.dndbuilder;
+	opens com.example.dndbuilder.controllers.build to javafx.fxml;
 }

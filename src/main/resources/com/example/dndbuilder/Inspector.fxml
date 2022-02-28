@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="820.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dndbuilder.controllers.InspectorController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="43.0" prefWidth="114.0" text="Inspector" AnchorPane.bottomAnchor="763.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="262.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="Symbol" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="name" alignment="TOP_LEFT" layoutX="14.0" layoutY="64.0" prefHeight="30.0" prefWidth="369.0" AnchorPane.bottomAnchor="726.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="64.0">
+         <font>
+            <Font name="Symbol" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="description" alignment="TOP_LEFT" layoutX="14.0" layoutY="94.0" prefHeight="724.0" prefWidth="369.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="94.0" />
+   </children>
+</AnchorPane>
