@@ -1,19 +1,28 @@
 package com.example.dndbuilder;
 
 
+import com.example.dndbuilder.controllers.build.AbilityScorePaneController;
 import com.example.dndbuilder.controllers.build.ClassPaneController;
 import com.example.dndbuilder.controllers.InspectorController;
 import com.example.dndbuilder.controllers.build.LanguagePaneController;
 import com.example.dndbuilder.controllers.build.RacePaneController;
+import com.example.dndbuilder.datatypes.Character;
 import javafx.fxml.FXML;
 
+
 public class MainController{
+
+
+	public Character character;
+
 
 	// Inject the other controllers into the main controller for access
 	@FXML private ClassPaneController classPaneController;
 	@FXML private RacePaneController racePaneController;
 	@FXML private InspectorController inspectorController;
 	@FXML private LanguagePaneController languagePaneController;
+	@FXML private AbilityScorePaneController abilityScorePaneController;
+
 
 	@FXML
 	private void initialize() {
@@ -22,6 +31,7 @@ public class MainController{
 		racePaneController.injectMainController(this);
 		inspectorController.injectMainController(this);
 		languagePaneController.injectMainController(this);
+		abilityScorePaneController.injectMainController(this);
 
 		// Inject other controllers to them
 		racePaneController.injectInspectorController(inspectorController);
