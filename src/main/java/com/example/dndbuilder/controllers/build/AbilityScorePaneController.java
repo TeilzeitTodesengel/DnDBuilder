@@ -11,31 +11,10 @@ public class AbilityScorePaneController {
 	MainController mainController;
 
 	@FXML
-	private ComboBox<AbilityScore> strSelection;
-	@FXML
-	private ComboBox<AbilityScore> dexSelection;
-	@FXML
-	private ComboBox<AbilityScore> conSelection;
-	@FXML
-	private ComboBox<AbilityScore> intSelection;
-	@FXML
-	private ComboBox<AbilityScore> wisSelection;
-	@FXML
-	private ComboBox<AbilityScore> chaSelection;
-	@FXML
-	private Label strLabel;
-	@FXML
-	private Label dexLabel;
-	@FXML
-	private Label conLabel;
-	@FXML
-	private Label intLabel;
-	@FXML
-	private Label wisLabel;
-	@FXML
-	private Label chaLabel;
+	private ComboBox<AbilityScore> strSelection, dexSelection, conSelection, intSelection, wisSelection, chaSelection;
 
-
+	@FXML
+	private Label strLabel, dexLabel, conLabel, intLabel, wisLabel, chaLabel;
 
 	AbilityScore[] selectionValues = {new AbilityScore(1,-5, false),
 			new AbilityScore(2,-4, false),
@@ -60,26 +39,15 @@ public class AbilityScorePaneController {
 
 	@FXML
 	private void initialize() {
-		// Setting the cell Factories for the Combo boxes & Setting the Button Cell for the Combo Box
-		// that the Objects are displayed correct
-		strSelection.setCellFactory(new Callback<>() {
+		// Setting the cell Factories for the Combo boxes that the Objects are displayed correctly
+		dexSelection.setCellFactory(cellFactory);
+		strSelection.setCellFactory(cellFactory);
+		conSelection.setCellFactory(cellFactory);
+		intSelection.setCellFactory(cellFactory);
+		wisSelection.setCellFactory(cellFactory);
+		chaSelection.setCellFactory(cellFactory);
 
-			@Override
-			public ListCell<AbilityScore> call(ListView<AbilityScore> param) {
-				return new ListCell<>() {
-
-					@Override
-					protected void updateItem(AbilityScore item, boolean empty) {
-						super.updateItem(item, empty);
-						if (item != null) {
-							setText(String.valueOf(item.getRawValue()));
-						} else {
-							setText(null);
-						}
-					}
-				};
-			}
-		});
+		// Setting the Button Cell for the Combo Box that the Objects are displayed correctly
 		strSelection.setButtonCell(new ListCell<>() {
 
 			@Override
@@ -90,24 +58,6 @@ public class AbilityScorePaneController {
 				} else {
 					setText(null);
 				}
-			}
-		});
-		dexSelection.setCellFactory(new Callback<>() {
-
-			@Override
-			public ListCell<AbilityScore> call(ListView<AbilityScore> param) {
-				return new ListCell<>() {
-
-					@Override
-					protected void updateItem(AbilityScore item, boolean empty) {
-						super.updateItem(item, empty);
-						if (item != null) {
-							setText(String.valueOf(item.getRawValue()));
-						} else {
-							setText(null);
-						}
-					}
-				};
 			}
 		});
 		dexSelection.setButtonCell(new ListCell<>() {
@@ -122,24 +72,6 @@ public class AbilityScorePaneController {
 				}
 			}
 		});
-		conSelection.setCellFactory(new Callback<>() {
-
-			@Override
-			public ListCell<AbilityScore> call(ListView<AbilityScore> param) {
-				return new ListCell<>() {
-
-					@Override
-					protected void updateItem(AbilityScore item, boolean empty) {
-						super.updateItem(item, empty);
-						if (item != null) {
-							setText(String.valueOf(item.getRawValue()));
-						} else {
-							setText(null);
-						}
-					}
-				};
-			}
-		});
 		conSelection.setButtonCell(new ListCell<>() {
 
 			@Override
@@ -150,24 +82,6 @@ public class AbilityScorePaneController {
 				} else {
 					setText(null);
 				}
-			}
-		});
-		intSelection.setCellFactory(new Callback<>() {
-
-			@Override
-			public ListCell<AbilityScore> call(ListView<AbilityScore> param) {
-				return new ListCell<>() {
-
-					@Override
-					protected void updateItem(AbilityScore item, boolean empty) {
-						super.updateItem(item, empty);
-						if (item != null) {
-							setText(String.valueOf(item.getRawValue()));
-						} else {
-							setText(null);
-						}
-					}
-				};
 			}
 		});
 		intSelection.setButtonCell(new ListCell<>() {
@@ -182,24 +96,6 @@ public class AbilityScorePaneController {
 				}
 			}
 		});
-		wisSelection.setCellFactory(new Callback<>() {
-
-			@Override
-			public ListCell<AbilityScore> call(ListView<AbilityScore> param) {
-				return new ListCell<>() {
-
-					@Override
-					protected void updateItem(AbilityScore item, boolean empty) {
-						super.updateItem(item, empty);
-						if (item != null) {
-							setText(String.valueOf(item.getRawValue()));
-						} else {
-							setText(null);
-						}
-					}
-				};
-			}
-		});
 		wisSelection.setButtonCell(new ListCell<>() {
 
 			@Override
@@ -210,24 +106,6 @@ public class AbilityScorePaneController {
 				} else {
 					setText(null);
 				}
-			}
-		});
-		chaSelection.setCellFactory(new Callback<>() {
-
-			@Override
-			public ListCell<AbilityScore> call(ListView<AbilityScore> param) {
-				return new ListCell<>() {
-
-					@Override
-					protected void updateItem(AbilityScore item, boolean empty) {
-						super.updateItem(item, empty);
-						if (item != null) {
-							setText(String.valueOf(item.getRawValue()));
-						} else {
-							setText(null);
-						}
-					}
-				};
 			}
 		});
 		chaSelection.setButtonCell(new ListCell<>() {
@@ -252,7 +130,6 @@ public class AbilityScorePaneController {
 		chaSelection.getItems().setAll(selectionValues);
 
 		// Adding listeners for the modificator Labels
-
 		strSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> strLabel.setText(String.valueOf(now.getModificator())));
 		dexSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> dexLabel.setText(String.valueOf(now.getModificator())));
 		conSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> conLabel.setText(String.valueOf(now.getModificator())));
@@ -264,4 +141,24 @@ public class AbilityScorePaneController {
 	public void injectMainController(MainController controller) {
 		mainController = controller;
 	}
+
+
+	Callback cellFactory = new Callback() {
+
+		@Override
+		public Object call(Object param) {
+			return new ListCell<AbilityScore>() {
+
+				@Override
+				protected void updateItem(AbilityScore item, boolean empty) {
+					super.updateItem(item, empty);
+					if (item != null) {
+						setText(String.valueOf(item.getRawValue()));
+					} else {
+						setText(null);
+					}
+				}
+			};
+		}
+	};
 }
