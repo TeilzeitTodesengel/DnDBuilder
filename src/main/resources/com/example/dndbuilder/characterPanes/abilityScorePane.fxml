@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dndbuilder.controllers.build.AbilityScorePaneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dndbuilder.controllers.build.AbilityScorePaneController">
    <children>
       <Label layoutX="14.0" layoutY="12.0" text="Stärke">
          <font>
@@ -12,35 +13,59 @@
          </font>
       </Label>
       <ComboBox fx:id="strSelection" layoutX="14.0" layoutY="40.0" prefWidth="150.0" AnchorPane.bottomAnchor="335.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="436.0" AnchorPane.topAnchor="40.0" />
+      <Label fx:id="strLabel" layoutX="171.0" layoutY="44.0" AnchorPane.bottomAnchor="339.0" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="401.0" AnchorPane.topAnchor="44.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <Label layoutX="14.0" layoutY="64.0" text="Geschicklichkeit">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <ComboBox fx:id="dexSelection" layoutX="14.0" layoutY="91.0" prefWidth="150.0" AnchorPane.bottomAnchor="284.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="436.0" AnchorPane.topAnchor="91.0" />
+      <Label fx:id="dexLabel" layoutX="171.0" layoutY="95.0" AnchorPane.bottomAnchor="288.0" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="401.0" AnchorPane.topAnchor="95.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <Label layoutX="14.0" layoutY="116.0" text="Konstitution">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <ComboBox fx:id="conSelection" layoutX="14.0" layoutY="143.0" prefWidth="150.0" AnchorPane.bottomAnchor="232.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="442.0" AnchorPane.topAnchor="143.0" />
+      <Label fx:id="intLabel" layoutX="171.0" layoutY="204.0" prefHeight="17.0" prefWidth="28.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <Label layoutX="14.0" layoutY="168.0" text="Intelligenz">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <ComboBox fx:id="intSelection" layoutX="14.0" layoutY="200.0" prefWidth="150.0" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="436.0" AnchorPane.topAnchor="200.0" />
+      <Label fx:id="conLabel" layoutX="171.0" layoutY="147.0" AnchorPane.bottomAnchor="236.0" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="401.0" AnchorPane.topAnchor="147.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <Label layoutX="14.0" layoutY="220.0" text="Weisheit">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <ComboBox fx:id="wisSelection" layoutX="14.0" layoutY="247.0" prefWidth="150.0" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="436.0" AnchorPane.topAnchor="247.0" />
+      <Label fx:id="wisLabel" layoutX="171.0" layoutY="251.0" AnchorPane.bottomAnchor="132.0" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="401.0" AnchorPane.topAnchor="251.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <Label layoutX="14.0" layoutY="272.0" text="Charisma">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <ComboBox fx:id="chaSelection" layoutX="14.0" layoutY="299.0" prefWidth="150.0" AnchorPane.bottomAnchor="76.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="436.0" AnchorPane.topAnchor="299.0" />
+      <Label fx:id="chaLabel" layoutX="171.0" layoutY="303.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="401.0" AnchorPane.topAnchor="303.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
    </children>
 </AnchorPane>
