@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.Callback;
 
+import java.util.List;
+
 public class AbilityScorePaneController {
 
 	MainController mainController;
@@ -16,26 +18,28 @@ public class AbilityScorePaneController {
 	@FXML
 	private Label strLabel, dexLabel, conLabel, intLabel, wisLabel, chaLabel;
 
-	AbilityScore[] selectionValues = {new AbilityScore(1,-5, false),
-			new AbilityScore(2,-4, false),
-			new AbilityScore(3,-4, false),
-			new AbilityScore(4,-3, false),
-			new AbilityScore(5,-3, false),
-			new AbilityScore(6,-2, false),
-			new AbilityScore(7,-2, false),
-			new AbilityScore(8,-1, false),
-			new AbilityScore(9,-1, false),
-			new AbilityScore(10,0, false),
-			new AbilityScore(11,0, false),
-			new AbilityScore(12,1, false),
-			new AbilityScore(13,1, false),
-			new AbilityScore(14,2, false),
-			new AbilityScore(15,2, false),
-			new AbilityScore(16,3, false),
-			new AbilityScore(17,3, false),
-			new AbilityScore(18,4, false),
-			new AbilityScore(19,4, false),
-			new AbilityScore(20,5, false),};
+	AbilityScore[] selectionValues = {
+			new AbilityScore(1, false),
+			new AbilityScore(2, false),
+			new AbilityScore(3, false),
+			new AbilityScore(4, false),
+			new AbilityScore(5, false),
+			new AbilityScore(6, false),
+			new AbilityScore(7, false),
+			new AbilityScore(8, false),
+			new AbilityScore(9, false),
+			new AbilityScore(10, false),
+			new AbilityScore(11, false),
+			new AbilityScore(12, false),
+			new AbilityScore(13, false),
+			new AbilityScore(14, false),
+			new AbilityScore(15, false),
+			new AbilityScore(16, false),
+			new AbilityScore(17, false),
+			new AbilityScore(18, false),
+			new AbilityScore(19, false),
+			new AbilityScore(20, false)
+	};
 
 	@FXML
 	private void initialize() {
@@ -161,4 +165,42 @@ public class AbilityScorePaneController {
 			};
 		}
 	};
+
+	public void onLoad(List<AbilityScore> selectedValues) {
+
+		if (selectedValues.get(0) != null) {
+			strSelection.getSelectionModel().select(selectedValues.get(0).getRawValue() - 1);
+		}
+		if (selectedValues.get(1) != null) {
+			dexSelection.getSelectionModel().select(selectedValues.get(1).getRawValue() - 1);
+		}
+		if (selectedValues.get(2) != null) {
+			conSelection.getSelectionModel().select(selectedValues.get(2).getRawValue() - 1);
+		}
+		if (selectedValues.get(3) != null) {
+			intSelection.getSelectionModel().select(selectedValues.get(3).getRawValue() - 1);
+		}
+		if (selectedValues.get(4) != null) {
+			wisSelection.getSelectionModel().select(selectedValues.get(4).getRawValue() - 1);
+		}
+		if (selectedValues.get(5) != null) {
+			chaSelection.getSelectionModel().select(selectedValues.get(5).getRawValue() - 1);
+		}
+	}
+
+	public void onSave() {
+		// getting the ability score list of the current character
+		List<AbilityScore> tempList = MainController.currentCharacter.getAbilityScores();
+
+		// setting the copied global values to th currently selected ones
+		tempList.get(0).setRawValue(strSelection.getSelectionModel().getSelectedItem().getRawValue());
+		tempList.get(1).setRawValue(dexSelection.getSelectionModel().getSelectedItem().getRawValue());
+		tempList.get(2).setRawValue(conSelection.getSelectionModel().getSelectedItem().getRawValue());
+		tempList.get(3).setRawValue(intSelection.getSelectionModel().getSelectedItem().getRawValue());
+		tempList.get(4).setRawValue(wisSelection.getSelectionModel().getSelectedItem().getRawValue());
+		tempList.get(5).setRawValue(chaSelection.getSelectionModel().getSelectedItem().getRawValue());
+
+		// overwriting the global values
+		MainController.currentCharacter.setAbilityScores(tempList);
+	}
 }

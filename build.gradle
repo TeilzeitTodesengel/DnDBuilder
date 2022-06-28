@@ -34,6 +34,8 @@ javafx {
 }
 
 dependencies {
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.3")
+
     implementation('org.controlsfx:controlsfx:11.1.0')
     implementation('com.dlsc.formsfx:formsfx-core:11.3.2') {
         exclude(group: 'org.openjfx')
