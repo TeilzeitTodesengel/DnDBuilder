@@ -43,6 +43,13 @@ public class AbilityScorePaneController {
 
 	@FXML
 	private void initialize() {
+		// initializing the ability score List of a new Character
+		if(MainController.loadedCharacter.getAbilityScores().isEmpty()) {
+			for (int i = 0; i < 6; i++) {
+				new AbilityScore(1, false);
+			}
+		}
+
 		// Setting the cell Factories for the Combo boxes that the Objects are displayed correctly
 		dexSelection.setCellFactory(cellFactory);
 		strSelection.setCellFactory(cellFactory);
@@ -134,12 +141,30 @@ public class AbilityScorePaneController {
 		chaSelection.getItems().setAll(selectionValues);
 
 		// Adding listeners for the modificator Labels
-		strSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> strLabel.setText(String.valueOf(now.getModificator())));
-		dexSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> dexLabel.setText(String.valueOf(now.getModificator())));
-		conSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> conLabel.setText(String.valueOf(now.getModificator())));
-		intSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> intLabel.setText(String.valueOf(now.getModificator())));
-		wisSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> wisLabel.setText(String.valueOf(now.getModificator())));
-		chaSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> chaLabel.setText(String.valueOf(now.getModificator())));
+		strSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> {
+			MainController.loadedCharacter.getAbilityScores().get(0).setRawValue(now.getRawValue());
+			strLabel.setText(String.valueOf(MainController.loadedCharacter.getAbilityScores().get(0).getModificator()));
+		});
+		dexSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> {
+			MainController.loadedCharacter.getAbilityScores().get(1).setRawValue(now.getRawValue());
+			dexLabel.setText(String.valueOf(MainController.loadedCharacter.getAbilityScores().get(1).getModificator()));
+		});
+		conSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> {
+			MainController.loadedCharacter.getAbilityScores().get(2).setRawValue(now.getRawValue());
+			conLabel.setText(String.valueOf(MainController.loadedCharacter.getAbilityScores().get(2).getModificator()));
+		});
+		intSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> {
+			MainController.loadedCharacter.getAbilityScores().get(3).setRawValue(now.getRawValue());
+			intLabel.setText(String.valueOf(MainController.loadedCharacter.getAbilityScores().get(3).getModificator()));
+		});
+		wisSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> {
+			MainController.loadedCharacter.getAbilityScores().get(4).setRawValue(now.getRawValue());
+			wisLabel.setText(String.valueOf(MainController.loadedCharacter.getAbilityScores().get(4).getModificator()));
+		});
+		chaSelection.getSelectionModel().selectedItemProperty().addListener((options, old, now) -> {
+			MainController.loadedCharacter.getAbilityScores().get(5).setRawValue(now.getRawValue());
+			chaLabel.setText(String.valueOf(MainController.loadedCharacter.getAbilityScores().get(5).getModificator()));
+		});
 	}
 
 	public void injectMainController(MainController controller) {
@@ -157,7 +182,7 @@ public class AbilityScorePaneController {
 				protected void updateItem(AbilityScore item, boolean empty) {
 					super.updateItem(item, empty);
 					if (item != null) {
-						setText(String.valueOf(item.getRawValue()));
+						setText(String.valueOf(item.getRawValue() + " (" + item.getModificator() + ")"));
 					} else {
 						setText(null);
 					}
@@ -190,7 +215,7 @@ public class AbilityScorePaneController {
 
 	public void onSave() {
 		// getting the ability score list of the current character
-		List<AbilityScore> tempList = MainController.currentCharacter.getAbilityScores();
+		List<AbilityScore> tempList = MainController.loadedCharacter.getAbilityScores();
 
 		// setting the copied global values to th currently selected ones
 		tempList.get(0).setRawValue(strSelection.getSelectionModel().getSelectedItem().getRawValue());
@@ -201,6 +226,6 @@ public class AbilityScorePaneController {
 		tempList.get(5).setRawValue(chaSelection.getSelectionModel().getSelectedItem().getRawValue());
 
 		// overwriting the global values
-		MainController.currentCharacter.setAbilityScores(tempList);
+		MainController.loadedCharacter.setAbilityScores(tempList);
 	}
 }

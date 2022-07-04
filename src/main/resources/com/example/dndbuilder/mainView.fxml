@@ -17,12 +17,12 @@
             <items>
                   <MenuItem fx:id="loadMenuItem" mnemonicParsing="false" text="Load Character" />
                   <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" text="Save Character" />
-              <MenuItem mnemonicParsing="false" text="Exit" />
+              <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="popup" mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -33,7 +33,7 @@
             <Menu fx:id="charName" mnemonicParsing="false" text="Character Name" />
         </menus>
       </MenuBar>
-      <AnchorPane prefHeight="445.0" prefWidth="635.0">
+      <AnchorPane fx:id="ap" prefHeight="445.0" prefWidth="635.0">
          <children>
             <SplitPane dividerPositions="0.6594827586206896" prefHeight="597.0" prefWidth="930.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>

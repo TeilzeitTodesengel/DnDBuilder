@@ -10,34 +10,36 @@ import com.example.dndbuilder.datatypes.AbilityScore;
 import com.example.dndbuilder.datatypes.Character;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainController{
 
-	File loadedChar = null;
+	static File loadedCharacterFile = null;
 
-	static List<AbilityScore> abilityScores = new ArrayList<AbilityScore>();
+	private Stage stage;
+	private Scene scene;
 
-
-	public static Character currentCharacter = new Character(
+	public static Character loadedCharacter = new Character(
 			"Isaac",
 			0,
-			abilityScores,
+			new ArrayList<AbilityScore>(),
 			null,
 			null,
 			null,
@@ -57,7 +59,9 @@ public class MainController{
 	@FXML private AbilityScorePaneController abilityScorePaneController;
 	@FXML private MenuItem loadMenuItem;
 	@FXML private MenuItem saveMenuItem;
+	@FXML private MenuItem exitMenuItem;
 	@FXML private Menu charName;
+	@FXML private AnchorPane ap;
 
 
 	@FXML
@@ -97,34 +101,46 @@ public class MainController{
 			}
 		});
 
-		// Initialize Global Lists
-		for(int i = 0; i < 6; i++) {
-			abilityScores.add(new AbilityScore(1,  false));
-		}
+		exitMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Parent root = null;
+				try {
+					root = FXMLLoader.load(getClass().getResource("startPane.fxml"));
+					stage = (Stage)  ap.getScene().getWindow();
+					scene = new Scene(root);
+					stage.setScene(scene);
+					stage.show();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+
+			}
+		});
 	}
 
-	private void onLoad() throws IOException {
+	public void onLoad() throws IOException {
 		// FileChooser to select the file to load
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Select");
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JSON", "*.json"));
 
 		// Saving the file in a local variable
-		loadedChar = fileChooser.showOpenDialog(Stage.getWindows().get(0));
+		loadedCharacterFile = fileChooser.showOpenDialog(Stage.getWindows().get(0));
 
 		// Turns the Json Object into an object of type character
 		ObjectMapper mapper = new ObjectMapper();
-		currentCharacter = mapper.readValue(
-				loadedChar,
+		loadedCharacter = mapper.readValue(
+				loadedCharacterFile,
 				Character.class
 		);
 		System.out.println("Character loaded");
 
 		// Changes the Character Name Field in the Top Bar
-		charName.setText(currentCharacter.getName());
+		charName.setText(loadedCharacter.getName());
 
 		// onLoad Methods of single components
-		abilityScorePaneController.onLoad(currentCharacter.getAbilityScores());
+		abilityScorePaneController.onLoad(loadedCharacter.getAbilityScores());
 		// TODO Race onLoad
 		// TODO Class onLoad
 		// TODO Languages onLoad
@@ -141,7 +157,7 @@ public class MainController{
 
 		// Turns currentCharacter object into Json Object
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-		String json = ow.writeValueAsString(currentCharacter);
+		String json = ow.writeValueAsString(loadedCharacter);
 
 		// File Picker, so that the User can choose a location and name for the save
 		FileChooser fileChooser = new FileChooser();
@@ -150,10 +166,10 @@ public class MainController{
 
 		// File Writer init
 		PrintWriter writer;
-		if(loadedChar == null) { // If there is no file loaded save into a new File
+		if(loadedCharacterFile == null) { // If there is no file loaded save into a new File
 			writer = new PrintWriter(fileChooser.showSaveDialog(Stage.getWindows().get(0)));
 		} else { // If a file is loaded overwrite the existing
-			writer = new PrintWriter(loadedChar);
+			writer = new PrintWriter(loadedCharacterFile);
 		}
 
 		// Writing the file.
