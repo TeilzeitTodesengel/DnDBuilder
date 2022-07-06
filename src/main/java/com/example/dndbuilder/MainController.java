@@ -6,15 +6,14 @@ import com.example.dndbuilder.controllers.build.ClassPaneController;
 import com.example.dndbuilder.controllers.InspectorController;
 import com.example.dndbuilder.controllers.build.LanguagePaneController;
 import com.example.dndbuilder.controllers.build.RacePaneController;
-import com.example.dndbuilder.datatypes.AbilityScore;
 import com.example.dndbuilder.datatypes.Character;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -27,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class MainController{
@@ -39,7 +39,7 @@ public class MainController{
 	public static Character loadedCharacter = new Character(
 			"Isaac",
 			0,
-			new ArrayList<AbilityScore>(),
+			new ArrayList<>(),
 			null,
 			null,
 			null,
@@ -59,6 +59,7 @@ public class MainController{
 	@FXML private AbilityScorePaneController abilityScorePaneController;
 	@FXML private MenuItem loadMenuItem;
 	@FXML private MenuItem saveMenuItem;
+	@FXML private MenuItem closeMenuItem;
 	@FXML private MenuItem exitMenuItem;
 	@FXML private Menu charName;
 	@FXML private AnchorPane ap;
@@ -79,34 +80,27 @@ public class MainController{
 		languagePaneController.injectInspectorController(inspectorController);
 
 		// Save & Load Logic
-		loadMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent actionEvent) {
-				try {
-					onLoad();
-				} catch (IOException e) {
-					throw new RuntimeException(e);
-				}
+		loadMenuItem.setOnAction(actionEvent -> {
+			try {
+				onLoad();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
 			}
 		});
 
-		saveMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent actionEvent) {
-				try {
-					onSave();
-				} catch (IOException e) {
-					throw new RuntimeException(e);
-				}
+		saveMenuItem.setOnAction(actionEvent -> {
+			try {
+				onSave();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
 			}
 		});
 
-		exitMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+		closeMenuItem.setOnAction(new EventHandler<>() {
 			@Override
 			public void handle(ActionEvent event) {
-				Parent root = null;
 				try {
-					root = FXMLLoader.load(getClass().getResource("startPane.fxml"));
+					Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("startPane.fxml")));
 					stage = (Stage)  ap.getScene().getWindow();
 					scene = new Scene(root);
 					stage.setScene(scene);
@@ -116,6 +110,11 @@ public class MainController{
 				}
 
 			}
+		});
+
+		exitMenuItem.setOnAction(actionEvent -> {
+			Platform.exit();
+			System.exit(0);
 		});
 	}
 
@@ -143,7 +142,7 @@ public class MainController{
 		abilityScorePaneController.onLoad(loadedCharacter.getAbilityScores());
 		// TODO Race onLoad
 		// TODO Class onLoad
-		// TODO Languages onLoad
+		languagePaneController.onLoad();
 	}
 
 	// Saves Character in external file
@@ -153,7 +152,7 @@ public class MainController{
 		abilityScorePaneController.onSave();
 		// TODO Race onSave
 		// TODO Class onSave
-		// TODO Languages onSave
+		languagePaneController.onSave();
 
 		// Turns currentCharacter object into Json Object
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
@@ -173,9 +172,7 @@ public class MainController{
 		}
 
 		// Writing the file.
-		writer.println(json);
 		writer.close();
 		System.out.println("Character saved");
-		System.out.println("Json: \n" + json);
 	}
 }

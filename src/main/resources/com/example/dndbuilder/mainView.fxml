@@ -17,7 +17,8 @@
             <items>
                   <MenuItem fx:id="loadMenuItem" mnemonicParsing="false" text="Load Character" />
                   <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" text="Save Character" />
-              <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" text="Exit" />
+              <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close Character" />
+                  <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

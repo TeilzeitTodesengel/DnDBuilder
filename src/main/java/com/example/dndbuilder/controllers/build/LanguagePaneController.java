@@ -127,4 +127,20 @@ public class LanguagePaneController {
 		inspectorController = controller;
 	}
 
+	// Save and Load Logic
+
+	public void onLoad() {
+		if (MainController.loadedCharacter.getLanguages() != null) {
+			for (int i =0; i < MainController.loadedCharacter.getLanguages().size(); i++) {
+				selectedLanguageList.getItems().add(MainController.loadedCharacter.getLanguages().get(i));
+			}
+			selectedLanguageList.setVisible(true);
+			removeButton.setVisible(true);
+		}
+	}
+
+	public void onSave() {
+		MainController.loadedCharacter.setLanguages(selectedLanguageList.getItems());
+	}
+
 }
